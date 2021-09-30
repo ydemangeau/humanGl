@@ -6,7 +6,7 @@
 /*   By: ydemange <ydemange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 11:14:54 by pitriche          #+#    #+#             */
-/*   Updated: 2021/09/29 17:50:07 by ydemange         ###   ########.fr       */
+/*   Updated: 2021/09/30 16:58:29 by ydemange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,58 @@ void	Game::init(void)
 	this->pos[2] = -4.0f;
 	this->pos[1] = 1.0f;
 	this->pos_locked = 8.0f;
+	this->obj.reserve(1000);
 
 
 
 	tmp.model = Matrix();
 	tmp.root_part = 0;
+	tmp.dimensions = {2.5,10,2.5};
 	this->obj.push_back(tmp);
-	
-	tmp2.model = Matrix().translate(1,1,1);
+
+
+	tmp2.model = Matrix().translate(1.8, 4, 0).rotate(0, 0, 0);
 	tmp2.root_part = &this->obj[0];
+	tmp2.dimensions = {1,1,1};
+
 	this->obj.push_back(tmp2);
 
-	tmp.model = Matrix().translate(2,1,1);
-	tmp.root_part = &this->obj[1];
-	this->obj.push_back(tmp);
 
 
+	
+	// tmp2.model = Matrix().translate(1.8, -2, -2).rotate(2, 0, 0);
+	// tmp2.root_part = &this->obj[0];
+	// tmp2.dimensions = {1,1,5};
 
+	// this->obj.push_back(tmp2);
+
+
+	// tmp.model = Matrix().translate(-1.8, -2, -2).rotate(2, 0, 0);
+	// tmp.root_part = &this->obj[0];
+	// tmp.dimensions = {1,1,5};
+	// this->obj.push_back(tmp);
+
+
+	// tmp.model = Matrix().translate(10,10,10);//.rotate(1, 0, 0);;
+	// tmp.root_part = &this->obj[1];
+	// tmp.dimensions = {5,10,4};
+
+	// this->obj.push_back(tmp);
+	
+	
+	std::cout << "obj[0]:"<< &this->obj[0] << std::endl;
+	std::cout << "obj[1]:"<< &this->obj[1] << std::endl;
+	std::cout << "obj[2]:"<< &this->obj[2] << std::endl;
+
+
+	// std::cout << "obj[0].root_part:"<< this->obj[0].root_part << std::endl; 
+	// std::cout << "obj[1].root_part:"<< this->obj[1].root_part << std::endl;
+	// std::cout << "obj[2].root_part:"<< this->obj[2].root_part << std::endl;
+
+
+	std::cout << "obj[0].root_part:"<< this->obj[0].root_part << "-->" << "0"<<std::endl; 
+	std::cout << "obj[1].root_part:"<< this->obj[1].root_part << "-->" << &this->obj[0]<<std::endl; 
+	std::cout << "obj[2].root_part:"<< this->obj[2].root_part << "-->" << &this->obj[1] <<std::endl; 
 	/* objects */
 
 
@@ -145,33 +180,31 @@ void		Game::_update_objects(float delta, const Keys &key)
 	// 	obj.angular_position[1] += obj.angular_velocity[1] * delta;
 	// 	obj.angular_position[2] += obj.angular_velocity[2] * delta;
 	// }
+	static Matrix mat;
+
+	mat.rotate(delta * 1e-3, 0, 0);
+		obj[1].model = mat * obj[1].model;// =obj[1].model.rotate(delta, 0, 0);
 
  	// 		//  std::cout << anim << std::endl;
 
  	// 	// std::cout << delta << std::endl;
 	
- 	// 	if (anim == 0)
-	// 	{
- 	// 		// std::cout << obj[1].angular_position[0] << std::endl;
+ 		// if (anim == 0)
+		// {
+ 		// 	// std::cout << obj[1].angular_position[0] << std::endl;
 			
-	// 		obj[1].position[2] -= delta/2;
-	// 		obj[1].angular_position[0] += delta;
-	// 		if (obj[1].angular_position[0] >= 0.5){
-	// 			anim = 1;
+		// 	obj[1].model.translate(0, 0, 0).rotate(delta, 0, 0);
+		// 	 if (obj[1].angular_position[0] >= 0.5){
+		// 		 anim = 1;
 
 				
-	// 		}
-	// 	}
+		// 	}
+		// }
 
-	// 	if (anim == 1)
-	// 	{
-	// 		obj[1].position[2] += delta/2;
-
-	// 		obj[1].angular_position[0] -= delta;
-	// 		if (obj[1].angular_position[0] <= -0.5)
-	// 			anim = 0;
+		// if (anim == 1)
+		// {
 		
-	// 	}
+		// }
 	
 
 	

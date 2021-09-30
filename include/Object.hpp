@@ -6,7 +6,7 @@
 /*   By: ydemange <ydemange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 11:13:45 by pitriche          #+#    #+#             */
-/*   Updated: 2021/09/29 17:24:16 by ydemange         ###   ########.fr       */
+/*   Updated: 2021/09/30 14:22:57 by ydemange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ class Object
 
 
 		Matrix 		GetModel() const;
-		Matrix 		model;
+		Matrix 		model; /* translation et rotation */
+		vec3		dimensions;
 		Object		*root_part;
 		
 
