@@ -6,7 +6,7 @@
 /*   By: ydemange <ydemange@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 11:14:54 by pitriche          #+#    #+#             */
-/*   Updated: 2021/09/30 16:58:29 by ydemange         ###   ########.fr       */
+/*   Updated: 2021/10/01 17:09:47 by ydemange         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,91 +29,156 @@ void	Game::init(void)
 	this->obj.reserve(1000);
 
 
-
+	/* obj[0] Tronc*/
 	tmp.model = Matrix();
+	tmp.rotate = Matrix().rotate(0,0,0);
+	tmp.translate = Matrix().translate(0,0,0);
 	tmp.root_part = 0;
-	tmp.dimensions = {2.5,10,2.5};
+	tmp.dimensions = {1.5,5,1.5};
 	this->obj.push_back(tmp);
 
+	/* obj[1] tete*/
+	tmp.model = Matrix();
+	tmp.rotate = Matrix().rotate(0,0,0);
+	tmp.translate = Matrix().translate(0,3,0);
+	tmp.root_part = &this->obj[0];
+	tmp.dimensions = {2,2,2};
+	this->obj.push_back(tmp);
 
-	tmp2.model = Matrix().translate(1.8, 4, 0).rotate(0, 0, 0);
+	/* obj[2] articulation bras droit*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(1.2,1.5,0);
 	tmp2.root_part = &this->obj[0];
 	tmp2.dimensions = {1,1,1};
+	this->obj.push_back(tmp2);
 
+	/* obj[3] bras droit*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[2];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);
+
+	/* obj[4] articulation bras gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(-1.2,1.5,0);
+	tmp2.root_part = &this->obj[0];
+	tmp2.dimensions = {1,1,1};
 	this->obj.push_back(tmp2);
 
 
+	/* obj[5] bras gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[4];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);
 
+
+/* obj[6] articulation jambe droit*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0.3,-2.5,0);
+	tmp2.root_part = &this->obj[0];
+	tmp2.dimensions = {1,1,1};
+	this->obj.push_back(tmp2);
+
+	/* obj[7] articulation jambe gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(-0.3,-2.5,0);
+	tmp2.root_part = &this->obj[0];
+	tmp2.dimensions = {1,1,1};
+	this->obj.push_back(tmp2);
+
+
+	/* obj[8] jambe droit*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[6];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);
+
+
+	/* obj[9] jambe gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[7];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);
+
+
+	/* obj[10] articulation coude droit */
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[3];
+	tmp2.dimensions = {1,1,1};
+	this->obj.push_back(tmp2);	
 	
-	// tmp2.model = Matrix().translate(1.8, -2, -2).rotate(2, 0, 0);
-	// tmp2.root_part = &this->obj[0];
-	// tmp2.dimensions = {1,1,5};
+	/* obj[11] articulation coude gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[5];
+	tmp2.dimensions = {1,1,1};
+	this->obj.push_back(tmp2);
 
-	// this->obj.push_back(tmp2);
-
-
-	// tmp.model = Matrix().translate(-1.8, -2, -2).rotate(2, 0, 0);
-	// tmp.root_part = &this->obj[0];
-	// tmp.dimensions = {1,1,5};
-	// this->obj.push_back(tmp);
-
-
-	// tmp.model = Matrix().translate(10,10,10);//.rotate(1, 0, 0);;
-	// tmp.root_part = &this->obj[1];
-	// tmp.dimensions = {5,10,4};
-
-	// this->obj.push_back(tmp);
+	/* obj[12] avant bras droit */
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[10];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);	
 	
+	/* obj[13] avant bras gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[11];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);
+
+	/* obj[14] articulation rotule droit */
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[8];
+	tmp2.dimensions = {1,1,1};
+	this->obj.push_back(tmp2);	
 	
-	std::cout << "obj[0]:"<< &this->obj[0] << std::endl;
-	std::cout << "obj[1]:"<< &this->obj[1] << std::endl;
-	std::cout << "obj[2]:"<< &this->obj[2] << std::endl;
+	/* obj[15] articulation rotule gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[9];
+	tmp2.dimensions = {1,1,1};
+	this->obj.push_back(tmp2);
 
 
-	// std::cout << "obj[0].root_part:"<< this->obj[0].root_part << std::endl; 
-	// std::cout << "obj[1].root_part:"<< this->obj[1].root_part << std::endl;
-	// std::cout << "obj[2].root_part:"<< this->obj[2].root_part << std::endl;
+	/* obj[16] molet droit */
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[14];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);	
+	
+	/* obj[17] molet gauche*/
+	tmp2.model = Matrix();
+	tmp2.rotate = Matrix().rotate(0,0,0);
+	tmp2.translate = Matrix().translate(0,-1,0);
+	tmp2.root_part = &this->obj[15];
+	tmp2.dimensions = {1,2.5,1};
+	this->obj.push_back(tmp2);
 
-
-	std::cout << "obj[0].root_part:"<< this->obj[0].root_part << "-->" << "0"<<std::endl; 
-	std::cout << "obj[1].root_part:"<< this->obj[1].root_part << "-->" << &this->obj[0]<<std::endl; 
-	std::cout << "obj[2].root_part:"<< this->obj[2].root_part << "-->" << &this->obj[1] <<std::endl; 
-	/* objects */
-
-
-
-
-	// this->obj.push_back(tmp);
-
-	// tmp.position = {1, 1, 0};
-	// tmp.angular_velocity = {0, 0, 0};
-	// tmp.diameter = 1;
-	// this->obj.push_back(tmp);
-
-	// tmp.position = {0, 0.5, 0};
-	// tmp.angular_velocity = {0.3f, 0.5f, 0.8f};
-	// tmp.diameter = 1;
-	// this->obj.push_back(tmp);
-
-	// /* cardinal boxes */
-	// tmp.position = {3, 0, 0};
-	// tmp.angular_velocity = {0, 0, 0};
-	// tmp.dimension = {2, 0.5f, 0.5f};
-	// this->obj.push_back(tmp);
-
-	// tmp.position = {0, 0, 3};
-	// tmp.dimension = {0.2f, 0.2f, 4};
-	// this->obj.push_back(tmp);
-
-
-	// tmp.position = {0, 3, 0};
-	// tmp.dimension = {0.6f, 3, 0.6f};
-	// this->obj.push_back(tmp);
-
-	// tmp.position = {1, 3, 4};
-	// tmp.velocity = {0, 0, 0};
-	// tmp.diameter = 1;
-	// this->obj.push_back(tmp);
 }
 
 /* ########################################################################## */
@@ -168,8 +233,17 @@ void		Game::_update_camera(float delta, const Keys &key)
 void		Game::_update_objects(float delta, const Keys &key)
 {
 	(void)key;
-	static unsigned anim = 0;
+	static float	elapsed_time = 0;
+	static float 	anim = 0;
+
 	delta *= this->game_speed;
+
+	
+	elapsed_time += delta;
+
+	
+
+
 
 	// for (Object &obj : this->obj)
 	// {
@@ -180,14 +254,43 @@ void		Game::_update_objects(float delta, const Keys &key)
 	// 	obj.angular_position[1] += obj.angular_velocity[1] * delta;
 	// 	obj.angular_position[2] += obj.angular_velocity[2] * delta;
 	// }
-	static Matrix mat;
+	
+	
+	
 
-	mat.rotate(delta * 1e-3, 0, 0);
-		obj[1].model = mat * obj[1].model;// =obj[1].model.rotate(delta, 0, 0);
 
- 	// 		//  std::cout << anim << std::endl;
+ 	std::cout << delta << std::endl;
+ 	std::cout << elapsed_time << std::endl;
+ 	std::cout << cos(elapsed_time)<< std::endl;
+ 	std::cout << cos(elapsed_time) * delta<< std::endl;
+ 	std::cout << anim << std::endl;
+	
+	// if (cos(elapsed_time))
 
- 	// 	// std::cout << delta << std::endl;
+
+
+obj[2].rotate.rotate(cos(elapsed_time) * delta, 0, 0);
+ obj[4].rotate.rotate(cos(elapsed_time) * -delta , 0, 0);
+ obj[6].rotate.rotate(cos(elapsed_time) * delta , 0, 0);
+ obj[7].rotate.rotate(cos(elapsed_time) * -delta , 0, 0);
+
+ 	obj[10].rotate.rotate((sin(elapsed_time) * delta)/2 , 0, 0);
+ 	obj[11].rotate.rotate((sin(elapsed_time) * delta)/2 , 0, 0);
+
+
+
+
+//  obj[14].rotate.rotate(cos(elapsed_time) * -delta , 0, 0);
+//  obj[15].rotate.rotate(cos(elapsed_time) * delta , 0, 0);
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 // 		//  std::cout << anim << std::endl;
+
 	
  		// if (anim == 0)
 		// {
